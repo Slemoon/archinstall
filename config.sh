@@ -52,7 +52,7 @@ install_grub(){
     if (mount | grep efivarfs > /dev/null 2>&1);then
         pacman -S --noconfirm grub efibootmgr -y
         rm -f /sys/firmware/efi/efivars/dump-*
-        grub-install --target=`uname -m`-efi --efi-directory=/boot --bootloader-id=Arch
+        grub-install --target=`uname -m`-efi --efi-directory=/boot --bootloader-id=arch
         grub-mkconfig -o /boot/grub/grub.cfg
     else
         pacman -S --noconfirm grub
@@ -236,7 +236,7 @@ install_app(){
 
 install_desktop(){
     color yellow "Choose the desktop you want to use"
-    select DESKTOP in "KDE" "Gnome" "Lxde" "Lxqt" "Mate" "Xfce" "Deepin" "Budgie" "Cinnamon";do
+    select DESKTOP in "KDE" "Gnome" "Lxde" "Lxqt" "Mate" "Xfce" "Deepin" "Budgie" "Cinnamon" "None";do
         case $DESKTOP in
             "KDE")
                 pacman -S plasma kdebase kdeutils kdegraphics sddm
@@ -282,6 +282,9 @@ install_desktop(){
             "Cinnamon")
                 pacman -S cinnamon gnome-terminal lightdm lightdm-gtk-greeter
                 systemctl enable lightdm
+                break
+            ;;
+	    "None")
                 break
             ;;
             *)
