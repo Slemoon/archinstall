@@ -52,7 +52,7 @@ install_grub(){
     if (mount | grep efivarfs > /dev/null 2>&1);then
         pacman -S --noconfirm grub efibootmgr -y
         rm -f /sys/firmware/efi/efivars/dump-*
-        grub-install --target=`uname -m`-efi --efi-directory=/boot --bootloader-id=arch
+        grub-install --target=`uname -m`-efi --efi-directory=/boot --bootloader-id=Arch-Linux
         grub-mkconfig -o /boot/grub/grub.cfg
     else
         pacman -S --noconfirm grub
