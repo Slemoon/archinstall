@@ -133,7 +133,7 @@ install(){
         fi
         sed -i 's/#Server/Server/g' /etc/pacman.d/mirrorlist.new
         rm -f rankmirrors.sh
-        wget https://raw.githubusercontent.com/YangMame/Arch-Linux-Installer/master/rankmirrors.sh
+        wget https://raw.githubusercontent.com/Slemoon/archinstaller/master/rankmirrors.sh
         bash rankmirrors.sh -n 3 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
         chmod +r /etc/pacman.d/mirrorlist
 	break
@@ -151,7 +151,7 @@ done
 
 config(){
     rm -rf /mnt/root/config.sh
-    wget https://raw.githubusercontent.com/YangMame/Arch-Linux-Installer/master/config.sh -O /mnt/root/config.sh
+    wget https://raw.githubusercontent.com/Slemoon/archinstaller/master/config.sh -O /mnt/root/config.sh
     chmod +x /mnt/root/config.sh
     arch-chroot /mnt /root/config.sh $ROOT $boot
 }
