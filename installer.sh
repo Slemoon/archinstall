@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 该死的颜色
+# Color
 color(){
     case $1 in
         red)
