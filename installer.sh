@@ -144,6 +144,7 @@ done
         echo $mirror > /etc/pacman.d/mirrorlist
     break
     done
+    pacman -Sy
     pacman -S --noconfirm archlinux-keyring -y
     pacstrap /mnt base base-devel --force
     genfstab -U -p /mnt > /mnt/etc/fstab
