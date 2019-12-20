@@ -12,31 +12,28 @@ color(){
     esac
 }
 
-mirrors(){
-    color green "Please choose your country (for Generate the pacman mirror list"
-    select COUNTRY in "AU" "AT" "BD" "BY" "BE" "BA" "BR" "BG" "CA" "CL" "CN" "CO" "HR" "CZ" "DK" "EC" "FI" "FR" "DE" "GR" "HK" "HU" "IS" "IN" "ID" "IR" "IE" "IL" "IT" "JP" "KZ" "LV" "LT" "LU" "MK" "MX" "AN" "NC" "NZ" "NO" "PH" "PL" "PT" "QA" "RO" "RU" "RS" "SG" "SK" "SI" "ZA" "KR" "ES" "SE" "CH" "TW" "TH" "TR" "UA" "GB" "US" "VN";do
-        mv /etc/pacman.d/mirrorlist /etc/mirrorlist.bak
-        color green "Generating mirror list , Please wait"
-        wget https://www.archlinux.org/mirrorlist/\?country=$COUNTRY\&protocol=https -O /etc/pacman.d/mirrorlist.new
-        if (! grep -q https /etc/pacman.d/mirrorlist.new);then
-            wget https://www.archlinux.org/mirrorlist/\?country=$COUNTRY\&protocol=http -O /etc/pacman.d/mirrorlist.new
-        fi
-        sed -i 's/#Server/Server/g' /etc/pacman.d/mirrorlist.new
-        rm -f rankmirrors.sh
-        wget https://raw.githubusercontent.com/Slemoon/archinstaller/master/rankmirrors.sh
-        bash rankmirrors.sh -n 3 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
-        chmod +r /etc/pacman.d/mirrorlist
-	break
-	done
-
-    color red "Please choose the mirror you want to use by input the num"
-    select mirror in "`tail -n 1 /etc/pacman.d/mirrorlist`" "`tail -n 2 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 3 /etc/pacman.d/mirrorlist | head -n 1`";do
-        echo $mirror > /etc/pacman.d/mirrorlist
-    break
-    done
-    pacman -Sy
-    pacman -S --noconfirm archlinux-keyring -y
-}
+color green "Please choose your country (for Generate the pacman mirror list"
+select COUNTRY in "AU" "AT" "BD" "BY" "BE" "BA" "BR" "BG" "CA" "CL" "CN" "CO" "HR" "CZ" "DK" "EC" "FI" "FR" "DE" "GR" "HK" "HU" "IS" "IN" "ID" "IR" "IE" "IL" "IT" "JP" "KZ" "LV" "LT" "LU" "MK" "MX" "AN" "NC" "NZ" "NO" "PH" "PL" "PT" "QA" "RO" "RU" "RS" "SG" "SK" "SI" "ZA" "KR" "ES" "SE" "CH" "TW" "TH" "TR" "UA" "GB" "US" "VN";do
+mv /etc/pacman.d/mirrorlist /etc/mirrorlist.bak
+color green "Generating mirror list , Please wait"
+wget https://www.archlinux.org/mirrorlist/\?country=$COUNTRY\&protocol=https -O /etc/pacman.d/mirrorlist.new
+if (! grep -q https /etc/pacman.d/mirrorlist.new);then
+    wget https://www.archlinux.org/mirrorlist/\?country=$COUNTRY\&protocol=http -O /etc/pacman.d/mirrorlist.new
+fi
+sed -i 's/#Server/Server/g' /etc/pacman.d/mirrorlist.new
+rm -f rankmirrors.sh
+wget https://raw.githubusercontent.com/Slemoon/archinstaller/master/rankmirrors.sh
+bash rankmirrors.sh -n 5 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
+chmod +r /etc/pacman.d/mirrorlist
+break
+done
+color red "Please choose the mirror you want to use by input the num"
+select mirror in "`tail -n 1 /etc/pacman.d/mirrorlist`" "`tail -n 2 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 3 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 4 /etc/pacman.d/mirrorlist | head -n 1`""`tail -n 5 /etc/pacman.d/mirrorlist | head -n 1`";do
+	echo $mirror > /etc/pacman.d/mirrorlist
+break
+done
+pacman -Sy
+pacman -S --noconfirm archlinux-keyring -y
 
 partition(){
     if (echo $1 | grep '/' > /dev/null 2>&1);then
