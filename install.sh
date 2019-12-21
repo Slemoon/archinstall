@@ -26,12 +26,12 @@ fi
 sed -i 's/#Server/Server/g' /etc/pacman.d/mirrorlist.new
 rm -f rankmirrors.sh
 wget https://raw.githubusercontent.com/Slemoon/archinstaller/master/rankmirrors.sh
-bash rankmirrors.sh -n 5 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
+bash rankmirrors.sh -n 8 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
 chmod +r /etc/pacman.d/mirrorlist
 break
 done
 color purple "Please choose the mirror you want to use by input the num"
-select mirror in "`tail -n 1 /etc/pacman.d/mirrorlist`" "`tail -n 2 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 3 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 4 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 5 /etc/pacman.d/mirrorlist | head -n 1`";do
+select mirror in "`tail -n 1 /etc/pacman.d/mirrorlist`" "`tail -n 2 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 3 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 4 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 5 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 6 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 7 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 8 /etc/pacman.d/mirrorlist | head -n 1`";do
 	echo $mirror > /etc/pacman.d/mirrorlist
 break
 done
