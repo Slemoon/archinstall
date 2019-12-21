@@ -208,7 +208,7 @@ install_desktop(){
                 break
             ;;
             "Gnome")
-                pacman -S gnome gnome-terminal
+                pacman -S gnome gnome-terminal gnome-software-packagekit-plugin
                 systemctl enable gdm
                 break
             ;;
