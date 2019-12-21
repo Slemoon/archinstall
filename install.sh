@@ -10,7 +10,7 @@ color(){
             echo -e "\033[32m$2\033[0m"
         ;;
 	purple)
-	    echo -e "\033[36m$2\033[0m"
+	    echo -e "\033[35m$2\033[0m"
 	;;
     esac
 }
