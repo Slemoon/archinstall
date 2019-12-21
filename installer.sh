@@ -157,26 +157,6 @@ config(){
     arch-chroot /mnt /root/config.sh $ROOT $boot
 }
 
-if [ "$1" != '' ];then
-    case $1 in
-        "--prepare")
-            prepare
-        ;;
-        "--install")
-            install
-        ;;
-        "--chroot")
-            config
-        ;;
-        "--help")
-            color red "--prepare :  prepare disk and partition\n--install :  install the base system\n--chroot :  chroot into the system to install other software"
-        ;;
-        *)
-            color red "Error !\n--prepare :  prepare disk and partition\n--install :  install the base system\n--chroot :  chroot into the system to install other software"
-        ;;
-    esac
-else
-    prepare
-    install
-    config
-fi
+prepare
+install
+config
