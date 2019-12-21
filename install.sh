@@ -149,12 +149,11 @@ prepare(){
 
 install(){
     pacman -Sy
-    pacstrap /mnt base base-devel --force
+    pacstrap -i /mnt base base-devel net-tools 
     genfstab -U -p /mnt > /mnt/etc/fstab
 }
 
 config(){
-    rm -rf /mnt/root/config.sh
     wget https://raw.githubusercontent.com/Slemoon/archinstaller/master/config.sh -O /mnt/root/config.sh
     chmod +x /mnt/root/config.sh
     arch-chroot /mnt /root/config.sh $ROOT $boot
