@@ -64,42 +64,6 @@ install_grub(){
     fi
 }
 
-install_bootctl(){
-    if (mount | grep efivarfs > /dev/null 2>&1);then
-        bootctl --path=/boot install
-        cp /usr/share/systemd/bootctl/loader.conf /boot/loader/
-	echo "timeout 4" >> /boot/loader/loader.conf
-	echo -e "title          Arch Linux\nlinux          ../vmlinuz-linux\ninitrd         ../initramfs-linux.img" > /boot/loader/entries/arch.conf
-
-    else
-        color yellow "Looks like your PC doesn't suppot UEFI or not in UEFI mode ENTER to use grub. Input q to quit"
-        read TMP
-        if [ "$TMP" == "" ];then
-            install_grub
-        else
-            exit
-        fi
-    fi
-}
-
-install_efistub(){
-    UUID=`blkid -s UUID -o value $root`
-    efi=`echo $boot | grep -o "[0-9]*"`
-    if (mount | grep efivarfs > /dev/null 2>&1);then
-        pacman -S --noconfirm efibootmgr
-        rm -f /sys/firmware/efi/efivars/dump-*
-        efibootmgr --disk $boot --part $efi --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=UUID=$UUID rw initrd=\initramfs-linux.img"
-    else
-        color yellow "Looks like your PC doesn't suppot UEFI or not in UEFI mode ENTER to use grub. Input q to quit"
-        read TMP
-        if [ "$TMP" == "" ];then
-            install_grub
-        else
-            exit
-        fi
-    fi
-}
-
 add_user(){
     color yellow "Input the user name you want to use (must be lower case)"
     read USER
@@ -301,15 +265,7 @@ clean(){
 main(){
     config_base
     config_locale
-    color yellow "Use Bootctl EFISUB or GRUB ? b)Bootctl e)EFISTUB ENTER)GRUB"
-    read TMP
-    if [ "$TMP" == "b" ];then
-        install_bootctl
-    elif [ "$TMP" == "e" ];then
-        install_efistub
-    else
-        install_grub
-    fi
+    install_grub
     add_user
     install_graphic
     color yellow "Do you have bluetooth ? y)YES ENTER)NO"
