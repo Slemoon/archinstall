@@ -28,7 +28,7 @@ chmod +r /etc/pacman.d/mirrorlist
 break
 done
 color red "Please choose the mirror you want to use by input the num"
-select mirror in "`tail -n 1 /etc/pacman.d/mirrorlist`" "`tail -n 2 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 3 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 4 /etc/pacman.d/mirrorlist | head -n 1`""`tail -n 5 /etc/pacman.d/mirrorlist | head -n 1`";do
+select mirror in "`tail -n 1 /etc/pacman.d/mirrorlist`" "`tail -n 2 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 3 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 4 /etc/pacman.d/mirrorlist | head -n 1`" "`tail -n 5 /etc/pacman.d/mirrorlist | head -n 1`";do
 	echo $mirror > /etc/pacman.d/mirrorlist
 break
 done
@@ -145,6 +145,7 @@ prepare(){
 }
 
 install(){
+    pacman -Sy
     pacstrap /mnt base base-devel --force
     genfstab -U -p /mnt > /mnt/etc/fstab
 }
