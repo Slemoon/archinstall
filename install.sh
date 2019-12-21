@@ -104,7 +104,7 @@ partition(){
         swapon $OTHER
     else
         umount $OTHER > /dev/null 2>&1
-	
+	mkdir -p /mnt/boot/
         mkdir -p /mnt$other
         mount $OTHER /mnt$other
     fi
