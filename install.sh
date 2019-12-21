@@ -51,7 +51,7 @@ partition(){
     color green "Format it ? y)yes ENTER)no"
     read tmp
 
-    if [ "$other" == "/boot" ];then
+    if [ "$other" == "/boot/EFI" ];then
         boot=$OTHER
     fi
 
@@ -138,7 +138,7 @@ prepare(){
         done
     fi
     mount $ROOT /mnt
-    color purple "Do you have another mount point ? if so please input it, such as : /boot /home and swap or just ENTER to skip"
+    color purple "Do you have another mount point ? if so please input it, such as : /boot/EFI /home and swap or just ENTER to skip"
     read other
     while [ "$other" != '' ];do
         partition $other
