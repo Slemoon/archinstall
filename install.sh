@@ -162,4 +162,3 @@ config(){
 prepare
 install
 config
-mkinitcpio -p linux
