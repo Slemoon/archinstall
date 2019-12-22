@@ -134,11 +134,11 @@ prepare(){
             else
                 mkfs.$type $ROOT
             fi
-            
+            break
         done
     fi
     mount $ROOT /mnt
-    color purple "Do you have another mount point ? if so please input it, such as : /boot /home and swap or just ENTER to skip"
+    color green "Do you have another mount point ? if so please input it, such as : /boot /home and swap or just ENTER to skip"
     read other
     while [ "$other" != '' ];do
         partition $other
