@@ -51,7 +51,7 @@ partition(){
     color green "Format it ? y)yes ENTER)no"
     read tmp
 
-    if [ "$other" == "/boot/EFI" ];then
+    if [ "$other" == "/boot" ];then
         boot=$OTHER
     fi
 
@@ -104,9 +104,8 @@ partition(){
         swapon $OTHER
     else
         umount $OTHER > /dev/null 2>&1
-	mkdir -p /mnt/boot/
         mkdir -p /mnt$other
-        mount $OTHER /mnt/boot/
+        mount $OTHER /mnt$other
     fi
 }
 
@@ -135,11 +134,11 @@ prepare(){
             else
                 mkfs.$type $ROOT
             fi
-            break
+            
         done
     fi
     mount $ROOT /mnt
-    color purple "Do you have another mount point ? if so please input it, such as : /boot/EFI /home and swap or just ENTER to skip"
+    color purple "Do you have another mount point ? if so please input it, such as : /boot /home and swap or just ENTER to skip"
     read other
     while [ "$other" != '' ];do
         partition $other
