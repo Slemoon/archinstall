@@ -150,7 +150,7 @@ prepare(){
 
 install(){
     pacman -Sy
-    pacstrap -i /mnt base base-devel net-tools 
+    pacstrap -i /mnt base base-devel net-tools linux
     genfstab -U -p /mnt > /mnt/etc/fstab
 }
 
