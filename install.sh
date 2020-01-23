@@ -149,7 +149,7 @@ prepare(){
 
 install(){
     pacman -Sy
-    pacstrap -i /mnt base base-devel net-tools linux-zen linux-zen-headers linux-firmware
+    pacstrap -i /mnt base base-devel net-tools linux linux-headers linux-firmware
     genfstab -U -p /mnt > /mnt/etc/fstab
 }
 
