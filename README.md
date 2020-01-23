@@ -1,4 +1,6 @@
 # Arch Linux 安装脚本
+## What is new in 2020.01.23
+### remove linux-zen Change to use normal linux-kernel
 ## What is new in 2019.12.28
 ### 1.加入了 linux-firmware 增强对笔记本驱动程序的支持
 ### 2.改为安装 linux-zen 内核及相应 dkms
